@@ -17,3 +17,25 @@ git clone https://github.com/endocrimes/windows.git
 ```
 
 then run the scripts you care about.
+
+## Installing WSL on Windows Server
+
+1) In an administrator shell, run the following commands:
+
+```powershell
+$ # Do not restart when prompted by this
+$ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+$ Invoke-WebRequest -Uri "https://aka.ms/wsl-ubuntu-1804" -OutFile
+"~/ubuntu.zip"
+$ Expand-Archive ~/ubuntu.zip ~/ubuntu
+```
+
+2) reboot your machine
+
+3) in an administrator shell, run:
+
+```powershell
+$ ~/ubuntu/ubuntu.exe
+$ $userenv = [System.Environment]::GetEnvironmentVariable("Path", "User")
+$ [System.Environment]::SetEnvironmentVariable("PATH", $userenv + ";%USERPROFILE%\ubuntu", "User")
+```
